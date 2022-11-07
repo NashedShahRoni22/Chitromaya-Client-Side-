@@ -1,27 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../Images/logoChitromaya.jpg"
+import logo from "../../Images/logoChitromaya.jpg";
+import { AiOutlineLogin } from "react-icons/ai";
 
 const Header = () => {
-    const menuItems = (
-        <li>
-          <Link to="/" className="mx-3">
-            Home
-          </Link>
+  const menuItems = (
+    <li>
+      <Link to="/" className="mx-3">
+        Home
+      </Link>
 
-          <Link to="/" className="mx-3">
-            Blog
-          </Link>
-          
-          <Link to="/orders" className="mx-3">
-            Reviews
-          </Link>
+      <Link to="/" className="mx-3">
+        Blog
+      </Link>
 
-          <Link to="/login" className="mx-3">
-            Login
-          </Link>
-        </li>
-      );
+      <Link to="/services" className="mx-3">
+        Services
+      </Link>
+
+      <Link to="/orders" className="mx-3">
+        Reviews
+      </Link>
+
+      <Link to="/login" className="mx-3">
+        Login
+      </Link>
+    </li>
+  );
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -50,17 +55,19 @@ const Header = () => {
           </ul>
         </div>
         <Link className="btn btn-ghost normal-case text-xl">
-            <img src={logo} alt="" className="h-12 rounded-full"/>
-            <span className="ml-5">CHITROMAYA</span>
+          <img src={logo} alt="" className="h-12 rounded-full" />
+          <span className="ml-5">CHITROMAYA</span>
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal p-0">
-          {menuItems}
-        </ul>
+        <ul className="menu menu-horizontal p-0">{menuItems}</ul>
       </div>
       <div className="navbar-end">
-        <Link className="btn">Get started</Link>
+        <span className="mr-5">Login</span>
+
+        <Link className="btn btn-circle">
+          <AiOutlineLogin className="text-2xl"></AiOutlineLogin>
+        </Link>
       </div>
     </div>
   );
