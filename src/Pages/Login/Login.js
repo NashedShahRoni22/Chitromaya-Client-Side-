@@ -9,7 +9,6 @@ const Login = () => {
   const { createGoogleUser, loginUser } = useContext(AuthContext);
   //handel Google login
   const handelGoogleLogin = () => {
-    console.log("clicked");
     createGoogleUser()
       .then((res) => {
         const user = res.user;
@@ -22,10 +21,9 @@ const Login = () => {
   const handelUserLogin = (e) => {
     e.preventDefault();
     const form = e.target;
-    const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(name, email, password);
+    console.log(email, password);
 
     loginUser(email, password)
     .then(userCredential =>{
@@ -73,20 +71,22 @@ const Login = () => {
             <input
               type="submit"
               value="Login"
-              className="glass py-2 mt-3 w-full"
+              className="glass py-2 mt-3 w-full hover:bg-blue-500 cursor-pointer"
             />
           </div>
         </form>
-        <p className="mt-3">
-          New Here ? <Link to="/register">Register Now</Link>
-        </p>
         <button
           onClick={handelGoogleLogin}
-          className="glass w-full mt-3 flex py-2 items-center justify-center"
+          className="glass w-full mt-3 flex py-2 items-center justify-center hover:bg-green-500"
         >
           <AiOutlineGoogle className="mr-3 text-2xl"></AiOutlineGoogle>
           <span>Continue with Google</span>
         </button>
+
+        <p className="mt-3">
+          New Here ? <Link to="/register" className="hover:text-blue-600">Register Now</Link>
+        </p>
+        
       </div>
     </section>
   );

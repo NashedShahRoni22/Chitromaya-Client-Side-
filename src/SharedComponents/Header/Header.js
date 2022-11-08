@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../Images/logoChitromaya.jpg";
-import { AiOutlineLogin } from "react-icons/ai";
+import { AiOutlineLogin, AiOutlineLogout } from "react-icons/ai";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import toast from "react-hot-toast";
 
 const Header = () => {
-  const {user} = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   const menuItems = (
     <li>
       <Link to="/" className="mx-3">
@@ -19,17 +20,29 @@ const Header = () => {
       <Link to="/services" className="mx-3">
         Services
       </Link>
-
       {/* conditional redering */}
-      <Link to="/" className="mx-3">
-        My Reviews
-      </Link>
+      {user?.email ? (
+        <>
+          <Link to="/" className="mx-3">
+            My Reviews
+          </Link>
 
-      <Link to="/" className="mx-3">
-        Add Services
-      </Link>
+          <Link to="/" className="mx-3">
+            Add Services
+          </Link>
+        </>
+      ) : (
+        <></>
+      )}
     </li>
   );
+  const handelUserLogOut = () => {
+    logOut()
+      .then(() => {
+        toast.error("Log Out Sucessfull!");
+      })
+      .catch((e) => {});
+  };
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -66,11 +79,28 @@ const Header = () => {
         <ul className="menu menu-horizontal p-0">{menuItems}</ul>
       </div>
       <div className="navbar-end">
-        <span className="mr-5">Login</span>
-
-        <Link className="btn btn-circle" to='/login'>
-          <AiOutlineLogin className="text-2xl"></AiOutlineLogin>
-        </Link>
+        {user?.displayName ? (
+          <>
+            <img src={user?.photoURL} alt="" className="h-12 w-12 mr-3 rounded-full" />
+            <span>{user?.displayName}</span>
+            <Link
+              className="btn btn-circle hover:bg-red-500 ml-3"
+              onClick={handelUserLogOut}
+            >
+              <AiOutlineLogout className="text-2xl"></AiOutlineLogout>
+            </Link>
+          </>
+        ) : (
+          <>
+            <span>Login</span>
+            <Link
+              className="btn btn-circle hover:bg-green-500 ml-3"
+              to="/login"
+            >
+              <AiOutlineLogin className="text-2xl"></AiOutlineLogin>
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import { AuthContext } from "../../AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
 
 const Register = () => {
-  const { createGoogleUser, createUser } = useContext(AuthContext);
+  const { createGoogleUser, createUser, updateUser } = useContext(AuthContext);
   const navigatae = useNavigate();
   //handel Google sign in
   const handelGoogleLogin = () => {
@@ -15,8 +15,8 @@ const Register = () => {
       .then((res) => {
         const user = res.user;
         console.log(user);
-        toast.success('Google Registration Successfull!');
-        navigatae('/');
+        toast.success("Google Registration Successfull!");
+        navigatae("/");
       })
       .catch((e) => console.error(e));
   };
@@ -27,20 +27,37 @@ const Register = () => {
     const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(name, email, password);
+    const photoURL = form.photoURL.value;
+    console.log(name, email, password, photoURL);
 
     createUser(email, password)
-    .then(userCredential =>{
-      const user = userCredential.user;
-      console.log(user);
-      toast.success("Registration Successfull!") ;
-      form.reset();
-      navigatae('/login')
-    })
-    .catch(error=>{
-      const errorMessage = error.message;
-      toast.error(errorMessage);
-    })
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        toast.success("Registration Successfull!");
+        userProfileUpdate(name, photoURL);
+        form.reset();
+        navigatae("/login");
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        toast.error(errorMessage);
+      });
+  };
+
+  //handel update user name
+  const userProfileUpdate = (name, photoURL) => {
+    const profile = {
+      displayName: name,
+      photoURL: photoURL,
+    };
+    updateUser(profile)
+      .then(() => {
+        console.log("Profile updated!");
+      })
+      .catch((e) => {
+        console.error(e);
+      });
   };
   return (
     <section className="grid md:grid-cols-2 py-20 items-center">
@@ -59,6 +76,19 @@ const Register = () => {
               name="name"
               placeholder="Enter Name"
               className="input input-bordered"
+              required
+            />
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Enter Photo URL</span>
+            </label>
+            <input
+              type="text"
+              name="photoURL"
+              placeholder="Enter Photo URL"
+              className="input input-bordered"
+              required
             />
           </div>
           <div className="form-control">
@@ -89,20 +119,20 @@ const Register = () => {
             <input
               type="submit"
               value="Register"
-              className="glass mt-3 py-2 w-full"
+              className="glass mt-3 py-2 w-full cursor-pointer hover:bg-blue-500"
             />
           </div>
         </form>
-        <p className="mt-3">
-          Already have an account? <Link to="/login">Login Now</Link>
-        </p>
         <button
           onClick={handelGoogleLogin}
-          className="glass w-full mt-3 flex py-2 items-center justify-center"
+          className="glass w-full mt-3 flex py-2 items-center justify-center hover:bg-green-500"
         >
           <AiOutlineGoogle className="mr-3 text-2xl"></AiOutlineGoogle>
           <span>Continue with Google</span>
         </button>
+        <p className="mt-3">
+          Already have an account? <Link to="/login" className="hover:text-blue-600">Login Now</Link>
+        </p>
       </div>
     </section>
   );
