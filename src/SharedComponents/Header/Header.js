@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../Images/logoChitromaya.jpg";
 import { AiOutlineLogin } from "react-icons/ai";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const Header = () => {
+  const {user} = useContext(AuthContext);
   const menuItems = (
     <li>
       <Link to="/" className="mx-3">
