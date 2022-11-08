@@ -18,12 +18,13 @@ const Header = () => {
         Services
       </Link>
 
-      <Link to="/orders" className="mx-3">
-        Reviews
+      {/* conditional redering */}
+      <Link to="/" className="mx-3">
+        My Reviews
       </Link>
 
-      <Link to="/login" className="mx-3">
-        Login
+      <Link to="/" className="mx-3">
+        Add Services
       </Link>
     </li>
   );
@@ -65,7 +66,7 @@ const Header = () => {
       <div className="navbar-end">
         <span className="mr-5">Login</span>
 
-        <Link className="btn btn-circle">
+        <Link className="btn btn-circle" to='/login'>
           <AiOutlineLogin className="text-2xl"></AiOutlineLogin>
         </Link>
       </div>

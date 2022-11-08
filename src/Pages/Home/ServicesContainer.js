@@ -12,7 +12,7 @@ const ServicesContainer = () => {
   }, []);
   return (
     <section>
-      <h1 className="text-center my-16 text-4xl">Choose Your Desire Package</h1>
+      <h1 className="text-center my-16 text-4xl font-bold">Our Packages</h1>
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-5">
         {services.map((service) => (
           <ServiceCard key={service.service_id} service={service}></ServiceCard>
