@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import loginBanner from "../../Images/login.png";
 import { AiOutlineGoogle } from "react-icons/ai";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
@@ -7,12 +7,14 @@ import toast from "react-hot-toast";
 
 const Login = () => {
   const { createGoogleUser, loginUser } = useContext(AuthContext);
+  //private route setup
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   //handel Google login
   const handelGoogleLogin = () => {
     createGoogleUser()
-      .then((res) => {
-        const user = res.user;
-        console.log(user);
+      .then(() => {
         toast.success('Google Login Successfull!');
       })
       .catch((e) => console.error(e));
@@ -23,14 +25,12 @@ const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
 
     loginUser(email, password)
-    .then(userCredential =>{
-      const user = userCredential.user;
-      console.log(user);
+    .then(() =>{
       toast.success("Login Successfull!");
       form.reset();
+      navigate(from, {replace:true});
     })
     .catch(error=>{
       const errorMessage = error.message;

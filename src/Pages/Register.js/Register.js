@@ -10,11 +10,8 @@ const Register = () => {
   const navigatae = useNavigate();
   //handel Google sign in
   const handelGoogleLogin = () => {
-    console.log("clicked");
     createGoogleUser()
-      .then((res) => {
-        const user = res.user;
-        console.log(user);
+      .then(() => {
         toast.success("Google Registration Successfull!");
         navigatae("/");
       })
@@ -28,12 +25,9 @@ const Register = () => {
     const email = form.email.value;
     const password = form.password.value;
     const photoURL = form.photoURL.value;
-    console.log(name, email, password, photoURL);
 
     createUser(email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
+      .then(() => {
         toast.success("Registration Successfull!");
         userProfileUpdate(name, photoURL);
         form.reset();

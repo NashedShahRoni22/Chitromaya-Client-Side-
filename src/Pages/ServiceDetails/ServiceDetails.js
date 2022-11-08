@@ -6,13 +6,47 @@ import {
   AiOutlineUser,
 } from "react-icons/ai";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import toast from "react-hot-toast";
 
 const ServiceDetails = () => {
   const { user } = useContext(AuthContext);
   const serviceDetails = useLoaderData();
-  const { title, img, price, description, facility } = serviceDetails;
+  const { _id, title, img, price, description, facility } = serviceDetails;
+
+  const handelUserReview =(e)=>{
+    e.preventDefault();
+    const form = e.target;
+    const userName = user?.displayName;
+    const userImg = user?.photoURL;
+    const userEmail = user?.email;
+    const userReview = form.reviewTxt.value;
+
+    const reviewMsg = {
+      serviceId : _id,
+      serviceName : title,
+      userEmail: userEmail,
+      customer : userName,
+      userImg : userImg,
+      reviewTxt: userReview,
+    }
+    fetch('http://localhost:5000/reviews',{
+      method:'POST',
+      headers:{
+        'content-type':'application/json'
+      },
+      body: JSON.stringify(reviewMsg)
+    })
+    .then(res => res.json())
+    .then(data => {
+      if(data.acknowledged){
+        form.reset();
+        toast.success("Thanks For Your Review")
+      }
+    })
+    .catch(e => console.error(e))
+  }
   return (
-    <section>
+    <form onSubmit={handelUserReview}>
       {/* package details */}
       <div className="w-full rounded-3xl glass p-2 mt-20 mb-10">
         <div className="flex">
@@ -62,22 +96,27 @@ const ServiceDetails = () => {
           <div className="form-control mx-5">
             <textarea
               className="textarea textarea-bordered rounded-xl h-48"
-              placeholder="Message"
+              name="reviewTxt"
+              placeholder="Left Your Review"
+              required
             ></textarea>
           </div>
-          <button className="glass ml-5 py-2 px-4 mt-3 rounded-3xl hover:bg-blue-600">Add Comment</button>
+          <div className="form-control mx-5">
+          <input type="submit" value="Add Review" className="glass py-2 px-4 mt-3 rounded-3xl hover:bg-blue-600 w-fit">
+          </input>
+          </div>
         </div>
       ) : (
         <div className="">
           <Link
             to="/login"
-            className="hover:text-blue-600 text-xl glass px-4 py-2 rounded-3xl"
+            className="hover:text-blue-600 glass px-4 py-2 rounded-3xl"
           >
-            Please login to add a review
+            Please Login To Add a Review
           </Link>
         </div>
       )}
-    </section>
+    </form>
   );
 };
 
