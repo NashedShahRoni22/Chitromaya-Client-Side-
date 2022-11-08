@@ -6,8 +6,8 @@ import { AuthContext } from "../../AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
 
 const Login = () => {
-  const { createGoogleUser } = useContext(AuthContext);
-
+  const { createGoogleUser, loginUser } = useContext(AuthContext);
+  //handel Google login
   const handelGoogleLogin = () => {
     console.log("clicked");
     createGoogleUser()
@@ -18,7 +18,27 @@ const Login = () => {
       })
       .catch((e) => console.error(e));
   };
-  const handelUserLogin = () => {};
+  //handel user login
+  const handelUserLogin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(name, email, password);
+
+    loginUser(email, password)
+    .then(userCredential =>{
+      const user = userCredential.user;
+      console.log(user);
+      toast.success("Login Successfull!");
+      form.reset();
+    })
+    .catch(error=>{
+      const errorMessage = error.message;
+      toast.error(errorMessage);
+    })
+  };
   return (
     <section className="grid md:grid-cols-2 py-20 items-center">
       <div className="hidden md:block">

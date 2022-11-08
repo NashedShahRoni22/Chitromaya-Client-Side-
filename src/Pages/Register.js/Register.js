@@ -1,24 +1,47 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import registerImg from "../../Images/register.png";
 import { AiOutlineGoogle } from "react-icons/ai";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
 
 const Register = () => {
-  const { createGoogleUser } = useContext(AuthContext);
-
+  const { createGoogleUser, createUser } = useContext(AuthContext);
+  const navigatae = useNavigate();
+  //handel Google sign in
   const handelGoogleLogin = () => {
     console.log("clicked");
     createGoogleUser()
       .then((res) => {
         const user = res.user;
         console.log(user);
-        toast.success('Google Registration Successfull!')
+        toast.success('Google Registration Successfull!');
+        navigatae('/');
       })
       .catch((e) => console.error(e));
   };
-  const handelUserRegistration = () => {};
+  //handel user registration
+  const handelUserRegistration = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(name, email, password);
+
+    createUser(email, password)
+    .then(userCredential =>{
+      const user = userCredential.user;
+      console.log(user);
+      toast.success("Registration Successfull!") ;
+      form.reset();
+      navigatae('/login')
+    })
+    .catch(error=>{
+      const errorMessage = error.message;
+      toast.error(errorMessage);
+    })
+  };
   return (
     <section className="grid md:grid-cols-2 py-20 items-center">
       <div className="hidden md:block">
@@ -47,6 +70,7 @@ const Register = () => {
               name="email"
               placeholder="Enter Email"
               className="input input-bordered"
+              required
             />
           </div>
           <div className="form-control">
@@ -58,6 +82,7 @@ const Register = () => {
               name="password"
               placeholder="Enter Password"
               className="input input-bordered"
+              required
             />
           </div>
           <div className="form-control">
