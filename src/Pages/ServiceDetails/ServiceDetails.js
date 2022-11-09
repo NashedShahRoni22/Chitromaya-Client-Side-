@@ -18,9 +18,9 @@ const ServiceDetails = () => {
 
   const reviewsurl = `http://localhost:5000/reviews?serviceId=${_id}`;
 
-  fetch(reviewsurl)
-    .then((res) => res.json())
-    .then((data) => setReviews(data));
+    fetch(reviewsurl)
+      .then((res) => res.json())
+      .then((data) => setReviews(data));
 
   const handelUserReview = (e) => {
     e.preventDefault();
@@ -34,7 +34,7 @@ const ServiceDetails = () => {
       serviceId: _id,
       serviceName: title,
       servicePrice: price,
-      serviceImg: img,
+      serviceImg:img,
       userEmail: userEmail,
       customer: userName,
       userImg: userImg,
@@ -70,7 +70,7 @@ const ServiceDetails = () => {
             <div>
               <img src={img} alt="serviceCardImg" className="rounded-3xl" />
             </div>
-            <div className="card-body">
+            <div className="card-body w-full">
               <h2 className="card-title">
                 <AiOutlineHighlight className="text-4xl"></AiOutlineHighlight>
                 {title}

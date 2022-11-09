@@ -27,7 +27,7 @@ const Header = () => {
             My Reviews
           </Link>
 
-          <Link to="/" className="mx-3">
+          <Link to="/addServices" className="mx-3">
             Add Services
           </Link>
         </>
