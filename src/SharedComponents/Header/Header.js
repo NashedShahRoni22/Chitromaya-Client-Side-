@@ -70,9 +70,9 @@ const Header = () => {
             {menuItems}
           </ul>
         </div>
-        <Link className="btn btn-ghost normal-case text-xl">
+        <Link className="flex items-center" to="/">
           <img src={logo} alt="" className="h-12 rounded-full" />
-          <span className="ml-5">CHITROMAYA</span>
+          <span className="ml-5 text-2xl">CHITROMAYA</span>
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">

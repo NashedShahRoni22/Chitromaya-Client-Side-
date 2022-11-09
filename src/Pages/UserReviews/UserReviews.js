@@ -24,6 +24,7 @@ const UserReviews = () => {
               </th>
               <th>Service</th>
               <th>Message</th>
+              <th>Edit</th>
             </tr>
           </thead>
           <tbody>
