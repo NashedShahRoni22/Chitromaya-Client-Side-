@@ -19,9 +19,9 @@ const ServiceDetails = () => {
   const reviewsurl = `http://localhost:5000/reviews?serviceId=${_id}`;
 
   fetch(reviewsurl)
-  .then(res => res.json())
-  .then(data => setReviews(data));
-  
+    .then((res) => res.json())
+    .then((data) => setReviews(data));
+
   const handelUserReview = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -33,6 +33,8 @@ const ServiceDetails = () => {
     const reviewMsg = {
       serviceId: _id,
       serviceName: title,
+      servicePrice: price,
+      serviceImg: img,
       userEmail: userEmail,
       customer: userName,
       userImg: userImg,

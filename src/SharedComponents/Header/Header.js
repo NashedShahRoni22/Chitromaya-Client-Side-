@@ -23,7 +23,7 @@ const Header = () => {
       {/* conditional redering */}
       {user?.email ? (
         <>
-          <Link to="/" className="mx-3">
+          <Link to="/userReviews" className="mx-3">
             My Reviews
           </Link>
 
