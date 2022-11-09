@@ -9,7 +9,6 @@ import UserReviews from "../Pages/UserReviews/UserReviews";
 import PrivateRoute from "../Routes/PrivateRoute";
 import AddServices from "../Pages/AddServices/AddServices";
 import NotFound from "../Pages/NotFound/NotFound";
-import EditReview from "../SharedComponents/EditReview/EditReview";
 
 export const router = createBrowserRouter([
   {
@@ -54,10 +53,6 @@ export const router = createBrowserRouter([
             <AddServices></AddServices>
           </PrivateRoute>
         ),
-      },
-      {
-        path: "/editReview/:id",
-        element: <EditReview></EditReview>
       },
       {
         path: "*",

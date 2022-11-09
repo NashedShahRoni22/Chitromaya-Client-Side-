@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import {
   AiOutlineHighlight,
@@ -18,9 +18,11 @@ const ServiceDetails = () => {
 
   const reviewsurl = `http://localhost:5000/reviews?serviceId=${_id}`;
 
+  useEffect(() => {
     fetch(reviewsurl)
       .then((res) => res.json())
       .then((data) => setReviews(data));
+  }, [reviewsurl]);
 
   const handelUserReview = (e) => {
     e.preventDefault();
@@ -34,7 +36,7 @@ const ServiceDetails = () => {
       serviceId: _id,
       serviceName: title,
       servicePrice: price,
-      serviceImg:img,
+      serviceImg: img,
       userEmail: userEmail,
       customer: userName,
       userImg: userImg,
@@ -62,44 +64,44 @@ const ServiceDetails = () => {
       <form onSubmit={handelUserReview} className="package-details">
         {/* package details */}
         <div className="w-full rounded-3xl glass p-2 mt-20 mb-10">
-          <h1 className="text-2xl font bold my-3 ml-3">
-            <AiOutlineStar></AiOutlineStar>
-            Package Details:
-          </h1>
-          <div className="flex">
-            <div>
-              <img src={img} alt="serviceCardImg" className="rounded-3xl" />
-            </div>
-            <div className="card-body w-full">
-              <h2 className="card-title">
-                <AiOutlineHighlight className="text-4xl"></AiOutlineHighlight>
-                {title}
-              </h2>
-              <h3>{price} BDT</h3>
-              <p>{description}</p>
-              <ul></ul>
-              <div className="overflow-x-auto w-full">
-                <table className="table w-full">
-                  <thead>
+          <div className="card-body w-full">
+            <h1 className="text-2xl font bold my-3 ml-3">
+              <AiOutlineStar></AiOutlineStar>
+              Package Details:
+            </h1>
+            <img
+              src={img}
+              alt="serviceCardImg"
+              className="rounded-3xl h-48 w-48"
+            />
+            <h2 className="card-title">
+              <AiOutlineHighlight className="text-4xl"></AiOutlineHighlight>
+              {title}
+            </h2>
+            <h3>{price} BDT</h3>
+            <p>{description}</p>
+            <ul></ul>
+            <div className="overflow-x-auto w-full">
+              <table className="table w-full">
+                <thead>
+                  <tr>
+                    <th className="flex">
+                      <AiOutlineCamera className="text-2xl"></AiOutlineCamera>
+                    </th>
+                    <th>
+                      <AiOutlineUser className="text-2xl"></AiOutlineUser>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {facility.map((fac) => (
                     <tr>
-                      <th className="flex">
-                        <AiOutlineCamera className="text-2xl"></AiOutlineCamera>
-                      </th>
-                      <th>
-                        <AiOutlineUser className="text-2xl"></AiOutlineUser>
-                      </th>
+                      <td>{fac.name}</td>
+                      <td>{fac.details}</td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {facility.map((fac) => (
-                      <tr>
-                        <td>{fac.name}</td>
-                        <td>{fac.details}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

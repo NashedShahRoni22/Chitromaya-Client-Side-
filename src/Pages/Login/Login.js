@@ -15,7 +15,7 @@ const Login = () => {
   const handelGoogleLogin = () => {
     createGoogleUser()
       .then(() => {
-        toast.success('Google Login Successfull!');
+        toast.success("Google Login Successfull!");
       })
       .catch((e) => console.error(e));
   };
@@ -27,15 +27,31 @@ const Login = () => {
     const password = form.password.value;
 
     loginUser(email, password)
-    .then(() =>{
-      toast.success("Login Successfull!");
-      form.reset();
-      navigate(from, {replace:true});
-    })
-    .catch(error=>{
-      const errorMessage = error.message;
-      toast.error(errorMessage);
-    })
+      .then((res) => {
+        const user = res.user;
+        const currentUser = {
+          email: user.email,
+        };
+        toast.success("Login Successfull!");
+        //get jwt token
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            localStorage.setItem("ChitromayaUserToken", data.token);
+            form.reset();
+            navigate(from, { replace: true });
+          });
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        toast.error(errorMessage);
+      });
   };
   return (
     <section className="grid md:grid-cols-2 py-20 items-center">
@@ -84,9 +100,11 @@ const Login = () => {
         </button>
 
         <p className="mt-3">
-          New Here ? <Link to="/register" className="hover:text-blue-600">Register Now</Link>
+          New Here ?{" "}
+          <Link to="/register" className="hover:text-blue-600">
+            Register Now
+          </Link>
         </p>
-        
       </div>
     </section>
   );

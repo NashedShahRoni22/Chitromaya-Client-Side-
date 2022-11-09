@@ -37,6 +37,7 @@ const AuthProvider = ({ children }) => {
   };
   //sign out user
   const logOut =()=>{
+    localStorage.removeItem('ChitromayaUserToken');
     return signOut(auth);
   }
   //update user's profile
