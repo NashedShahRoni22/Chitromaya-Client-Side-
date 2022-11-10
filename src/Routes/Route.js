@@ -9,6 +9,7 @@ import UserReviews from "../Pages/UserReviews/UserReviews";
 import PrivateRoute from "../Routes/PrivateRoute";
 import AddServices from "../Pages/AddServices/AddServices";
 import NotFound from "../Pages/NotFound/NotFound";
+import Blog from "../Pages/Blog/Blog";
 
 export const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ export const router = createBrowserRouter([
             <AddServices></AddServices>
           </PrivateRoute>
         ),
+      },
+      {
+        path:'/blog',
+        element:<Blog></Blog>
       },
       {
         path: "*",

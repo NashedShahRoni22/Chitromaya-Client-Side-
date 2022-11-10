@@ -4,3 +4,4 @@ Packages used:
 3)React Icons
 4)Firebase
 6)React Photo View
+7)JWT Token Used for Authorization
