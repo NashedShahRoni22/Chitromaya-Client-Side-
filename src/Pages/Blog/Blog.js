@@ -1,20 +1,20 @@
 import React from "react";
 import image from "../../Images/chitromayaFAQ.png";
-import useTitle from "../../hooks/useTitle"
+import useTitle from "../../hooks/useTitle";
 
 const Blog = () => {
   useTitle("Blog");
   return (
-    <section className="my-20 flex items-center">
-      <div className="w-1/2">
+    <section className="mx-5 my-20 md:flex items-center">
+      <div className="w-1/2 my-3 hidden md:block">
         <img src={image} alt="" />
       </div>
-      <div className="w-1/2">
+      <div className="md:w-1/2 my-3">
         <div>
           {/* The button to open modal */}
-          <label htmlFor="my-modal" className="glass py-2 px-4">
-            Difference between SQL and NoSQL
-          </label>
+          <div className="glass py-2 px-4">
+            <label htmlFor="my-modal">Difference between SQL and NoSQL</label>
+          </div>
 
           {/* Put this part before </body> tag */}
           <input type="checkbox" id="my-modal" className="modal-toggle" />
@@ -40,9 +40,11 @@ const Blog = () => {
         </div>
         <div className="mt-5">
           {/* The button to open modal */}
-          <label htmlFor="my-modal2" className="glass py-2 px-4">
-            What is JWT, and how does it work?
-          </label>
+          <div className="glass py-2 px-4">
+            <label htmlFor="my-modal2">
+              What is JWT, and how does it work?
+            </label>
+          </div>
 
           {/* Put this part before </body> tag */}
           <input type="checkbox" id="my-modal2" className="modal-toggle" />
@@ -68,9 +70,11 @@ const Blog = () => {
         </div>
         <div className="mt-5">
           {/* The button to open modal */}
-          <label htmlFor="my-modal3" className="glass py-2 px-4">
-            What is the difference between javascript and NodeJS?
-          </label>
+          <div className="glass py-2 px-4">
+            <label htmlFor="my-modal3">
+              What is the difference between javascript and NodeJS?
+            </label>
+          </div>
 
           {/* Put this part before </body> tag */}
           <input type="checkbox" id="my-modal3" className="modal-toggle" />
@@ -98,9 +102,11 @@ const Blog = () => {
         </div>
         <div className="mt-5">
           {/* The button to open modal */}
-          <label htmlFor="my-modal4" className="glass py-2 px-4">
-            How does NodeJS handle multiple requests at the same time?
-          </label>
+          <div className="glass py-2 px-4">
+            <label htmlFor="my-modal4">
+              How does NodeJS handle multiple requests at the same time?
+            </label>
+          </div>
 
           {/* Put this part before </body> tag */}
           <input type="checkbox" id="my-modal4" className="modal-toggle" />
