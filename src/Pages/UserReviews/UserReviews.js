@@ -3,8 +3,10 @@ import { AuthContext } from "../../AuthProvider/AuthProvider";
 import UserReviewRow from "../../SharedComponents/UserReviewRow/UserReviewRow";
 import { AiOutlineCamera } from "react-icons/ai";
 import toast from "react-hot-toast";
+import useTitle from "../../hooks/useTitle";
 
 const UserReviews = () => {
+  useTitle("My Reviews")
   const { user, logOut } = useContext(AuthContext);
   const [userReviews, setUserReviews] = useState([]);
   const userReviewsurl = `http://localhost:5000/userReviews?userEmail=${user?.email}`;

@@ -4,8 +4,10 @@ import registerImg from "../../Images/register.png";
 import { AiOutlineGoogle } from "react-icons/ai";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
+import useTitle from "../../hooks/useTitle";
 
 const Register = () => {
+  useTitle("Register")
   const { createGoogleUser, createUser, updateUser } = useContext(AuthContext);
   const navigatae = useNavigate();
   //handel Google sign in

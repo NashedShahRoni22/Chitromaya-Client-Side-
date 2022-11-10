@@ -1,7 +1,9 @@
 import React from "react";
 import image from "../../Images/chitromayaFAQ.png";
+import useTitle from "../../hooks/useTitle"
 
 const Blog = () => {
+  useTitle("Blog");
   return (
     <section className="my-20 flex items-center">
       <div className="w-1/2">

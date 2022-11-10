@@ -4,8 +4,10 @@ import loginBanner from "../../Images/login.png";
 import { AiOutlineGoogle } from "react-icons/ai";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
+import useTitle from "../../hooks/useTitle";
 
 const Login = () => {
+  useTitle("Login")
   const { createGoogleUser, loginUser } = useContext(AuthContext);
   //private route setup
   const navigate = useNavigate();
