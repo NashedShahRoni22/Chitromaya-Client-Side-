@@ -6,7 +6,7 @@ import { AiFillEye } from "react-icons/ai";
 const ServicesContainer = () => {
   const [services, setServices] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/servicesThree")
+    fetch("https://chitromaya-server.vercel.app/servicesThree")
       .then((res) => res.json())
       .then((data) => setServices(data));
   }, []);

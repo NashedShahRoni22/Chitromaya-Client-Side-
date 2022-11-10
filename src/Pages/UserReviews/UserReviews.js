@@ -9,7 +9,7 @@ const UserReviews = () => {
   useTitle("My Reviews")
   const { user, logOut } = useContext(AuthContext);
   const [userReviews, setUserReviews] = useState([]);
-  const userReviewsurl = `http://localhost:5000/userReviews?userEmail=${user?.email}`;
+  const userReviewsurl = `https://chitromaya-server.vercel.app/userReviews?userEmail=${user?.email}`;
 
   useEffect(() => {
     fetch(userReviewsurl, {

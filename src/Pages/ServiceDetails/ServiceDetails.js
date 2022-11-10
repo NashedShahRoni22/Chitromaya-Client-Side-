@@ -9,14 +9,16 @@ import {
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
 import Reviews from "../Reviews/Reviews";
+import useTitle from "../../hooks/useTitle";
 
 const ServiceDetails = () => {
+  useTitle("Service Details")
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
   const serviceDetails = useLoaderData();
   const { _id, title, img, price, description, facility } = serviceDetails;
 
-  const reviewsurl = `http://localhost:5000/reviews?serviceId=${_id}`;
+  const reviewsurl = `https://chitromaya-server.vercel.app/reviews?serviceId=${_id}`;
 
   useEffect(() => {
     fetch(reviewsurl)
@@ -42,7 +44,7 @@ const ServiceDetails = () => {
       userImg: userImg,
       reviewTxt: userReview,
     };
-    fetch("http://localhost:5000/reviews", {
+    fetch("https://chitromaya-server.vercel.app/reviews", {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -6,7 +6,7 @@ import StayInTouch from './StayInTouch';
 import useTitle from '../../hooks/useTitle';
 
 const Home = () => {
-    useTitle('Chitromaya Home')
+    useTitle('Home')
     return (
         <div>
             <Slider></Slider>
