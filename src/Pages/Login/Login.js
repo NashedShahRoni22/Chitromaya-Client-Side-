@@ -16,8 +16,25 @@ const Login = () => {
   //handel Google login
   const handelGoogleLogin = () => {
     createGoogleUser()
-      .then(() => {
+      .then((res) => {
+        const user = res.user;
+        const currentUser = {
+          email: user.email,
+        };
         toast.success("Google Login Successfull!");
+        //get jwt token
+        fetch("https://chitromaya-server.vercel.app/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+        .then((res) => res.json())
+          .then((data) => {
+            localStorage.setItem("ChitromayaUserToken", data.token);
+            navigate(from, { replace: true });
+          });
       })
       .catch((e) => console.error(e));
   };
