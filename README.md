@@ -4,11 +4,11 @@ https://chitromaya-7e217.web.app/
 
 Client Side Repository:
 -----------------------
-https://github.com/Porgramming-Hero-web-course/b6a11-service-review-client-side-NashedShahRoni22
+https://github.com/NashedShahRoni22/Chitromaya-Client-Side-
 
 Server Side Repository:
 -----------------------
-https://github.com/Porgramming-Hero-web-course/b6a11-service-review-server-side-NashedShahRoni22
+https://github.com/NashedShahRoni22/Chitromaya-Server-Side-
 
 --------------------
 Packages I have used:
